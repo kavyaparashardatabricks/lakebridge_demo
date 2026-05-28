@@ -1,0 +1,30 @@
+{
+  "_comment": "Example BladeBridge override file for Redshift / SQL Server. Pass to install-transpile when prompted for 'Specify the config file to override the default[Bladebridge] config'. Tune the prefixes/rewrites for your customer's house style.",
+
+  "variable_prefix": "v_",
+  "argument_prefix": "p_",
+  "constant_prefix": "c_",
+
+  "datatype_overrides": {
+    "VARCHAR(MAX)": "STRING",
+    "NVARCHAR":     "STRING",
+    "NUMERIC":      "DECIMAL",
+    "DATETIME2":    "TIMESTAMP",
+    "SUPER":        "VARIANT"
+  },
+
+  "function_overrides": {
+    "GETDATE":      "current_timestamp",
+    "ISNULL":       "coalesce",
+    "NEWID":        "uuid",
+    "DATEADD":      "dateadd",
+    "JSON_PARSE":   "parse_json"
+  },
+
+  "rewrite_rules": {
+    "drop_diststyle":   true,
+    "drop_distkey":     true,
+    "drop_sortkey":     true,
+    "convert_identity_to_generated_always": true
+  }
+}
